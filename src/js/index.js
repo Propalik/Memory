@@ -1,5 +1,19 @@
 // your code
-const EMOJIS = ["🥔", "🍒", "🥑", "🌽", "🥕", "🍇", "🍉", "🍌", "🥭", "🍍", "🥕", "🍇", "🍉", "🍌", "🥭", "🍍"];
+const EMOJIS = ["🥔", "🍒", "🥑", "🌽", "🥕", "🍇", "🍉", "🍌", "🥭", "🍍"];
+
+/**
+ *
+ * @param {string[]} items - абстрактиные данные для перемешивания
+ * @returns
+ */
+function shuffleAndSortCards(items) {
+  const sortedArr = items.sort(() => Math.random(items) - 0.5);
+  const duplicateArr = [...sortedArr].splice(0, 8);
+  const doubleArr = [...duplicateArr, ...duplicateArr];
+  const sortedDoubleArr = doubleArr.sort(() => Math.random(doubleArr) - 0.5);
+  return sortedDoubleArr;
+}
+shuffleAndSortCards(EMOJIS);
 
 /**
  * Состояние игры
@@ -34,7 +48,6 @@ const SELECTORS = {
   win: document.querySelector(".win"),
 };
 
-
 //генерация игрового поля
 const generateGame = () => {
   const dimensions = SELECTORS.board.dataset.dimension;
@@ -43,7 +56,7 @@ const generateGame = () => {
     throw new Error("Размер игрового поля должен быть четным");
   }
 
-// итерация по карточкам
+  // итерация по карточкам
   const cardHTML = EMOJIS.map((emoji) => {
     return `
     <div class="card">
@@ -53,8 +66,17 @@ const generateGame = () => {
     </div>
      `;
   }).join("");
-  SELECTORS.board.insertAdjacentHTML("beforeend", cardHTML)
-  console.log(cardHTML);
+  SELECTORS.board.insertAdjacentHTML("beforeend", cardHTML);
+
+  const cards = document.querySelectorAll(".card");
+
+  // Переберите каждую карточку и добавьте обработчик событий клика
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      // При клике на карточку, переключите класс "flipped" для переворачивания карточки
+      card.classList.toggle("flipped");
+    });
+  });
 };
 
 generateGame();
