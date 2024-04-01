@@ -8,10 +8,10 @@
  * @property {HTMLElement} win - Элемент для отображения сообщения о победе.
  */
 export const SELECTORS = {
-    boardContainer: document.querySelector(".board-container"),
-    board: document.querySelector(".board"),
-    moves: document.querySelector(".moves"),
-    timer: document.querySelector(".timer"),
-    start: document.querySelector("button"),
-    win: document.querySelector(".win"),
-  };
+  boardContainer: document.querySelector(".board-container"),
+  board: document.querySelector(".board"),
+  moves: document.querySelector(".moves"),
+  timer: document.querySelector(".timer"),
+  start: document.querySelector("button"),
+  win: document.querySelector(".win"),
+};
